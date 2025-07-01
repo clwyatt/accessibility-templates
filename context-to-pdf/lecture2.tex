@@ -1,0 +1,154 @@
+\setupbackend[format=pdf/3]
+\enabledirectives[backend.usetags=mkiv]
+
+\mainlanguage[en]
+\setuppapersize[letter]
+\setupbodyfont[modern]
+  
+\setuptagging[state=start]
+\setupinteraction[state=start]
+
+
+\usemodule[amsmath]
+
+\startdocument
+  [metadata:title={Modeling and Characterization of Signals and Systems},
+   metadata:subtitle={ECE 3704},
+   metadata:author={Chris Wyatt},
+   metadata:date={2025.6.27}]
+
+\title{Modeling and Characterization of Signals and Systems}
+C.L. Wyatt
+Last Updated: \date
+\blank[3*medium]
+
+
+Todays lecture is a review of material from ECE 2714. We will review the modeling and characterization of continuous-time and discrete-time signals and systems.
+
+\section{Signals}
+
+Signals are modelled as functions $f: A \rightarrow B$ where $A$ and $B$ are sets.
+
+Examples of some commonly encountered signals:
+
+\startitemize
+\item
+  $A\in \mathbb{R}$, $B\in \mathbb{R}$: CT (Analog) signals
+\item 
+  $A\in \mathbb{Z}$, $B\in \mathbb{R}$: DT real-valued signals
+\item 
+  $A\in \mathbb{Z}$, $B\in \mathbb{C}$: DT complex-valued signals
+\item
+  $A\in \mathbb{R}$, $B\in \mathbb{R}^2$: two-channel CT (Analog Stero) signals
+\stopitemize
+
+
+To model signals we can build them up from primitive signals using transformations and combinations.
+
+Some examples of primitive CT signals:
+
+\startitemize
+\item
+$\delta(t)$, the delta function
+\item
+$u(t)$, the step function
+\item
+$e^{st}\; s\in\mathbb{C}$, the complex exponential
+\stopitemize
+
+Recall the important relations for the complex exponential. Let $s = \alpha + j\beta$, where $\alpha, \beta \in \mathbb{R}$, then
+
+\placeformula[-]
+\startformula
+e^{st} = e^{(\alpha + j\beta)t} = e^{\alpha t}\, e^{j\beta t} = e^{\alpha t}\left(\cos(\beta t) + j\sin(\beta t) \right) 
+\stopformula
+
+By combining primitive signals we can create other signals. For example, the cosine function can be written as the weighted, linear combination of two complex exponentials
+
+\placeformula[-]
+\startformula
+\cos(\omega t) = \frac{1}{2} e^{j\omega_0 t} + \frac{1}{2} e^{-j\omega_0 t}
+\stopformula
+
+A similar example is the Fourier Series representation of periodic CT signals, $x(t)$, that meet the Direchlet conditions. It is an infinite weighted, linear combination of complex exponentials
+
+\placeformula[-]
+\startformula
+x(t) = \sum\limits_{k = -\infty}^{\infty} a_k\, e^{jk\omega_0\, t}
+\stopformula
+
+We can also think about decomposing complex signals into primitive functions rather than building them up. Recall the CT Fourier decomposition (transform) of a signal $x(t)$ is given by the improper, definite integral:
+
+\placeformula[-]
+\startformula
+X(\omega) = \int\limits_{-\infty}^{\infty} x(t) e^{j\omega\, t}\; dt
+\stopformula
+
+which applies to many, but not all, signals.
+
+
+Some example primitives for DT signals are:
+
+\startitemize
+\item $\delta[n]$, the discrete delta function
+\item $u[n]$, the discrete unit step
+\item $z^n,\; z\in\mathbb{C}$, the complex exponential
+\stopitemize
+
+Recall the DT complex exponential can be written as follows. Let $z = r\, e^{j\theta}, \, r,\theta\in\mathbb{R}$, then
+
+\placeformula[-]
+\startformula
+z^n = \left( r\, e^{j\theta} \right)^n = r^n\, e^{j\theta\, n} = r^n\left(\cos(\theta\, n) + j\sin(\theta\, n) \right)  
+\stopformula
+
+Note: the type of signal, DT or CT, real-valued or complex valued, etc. can usually be inferred. To make this easier we use square brackets $[]$ to define DT signals and parenthesis $()$ to define CT signals.
+
+\par
+As before, we can construct more complex DT signals by taking products and weighted linear combimations of these primitive signals, for example:
+
+\startitemize
+\item $\left(\gamma\right)^n\; u[n],\; \gamma\in\mathbb{R}$
+\item $\left(\gamma\right)^n\,\cos(\omega_0 n)\; u[n],\; \gamma,\omega_0\in\mathbb{R}$
+\stopitemize
+
+In many cases the same signals can be expressed in different forms. In the last example above
+
+\placeformula[-]
+\startformula
+\left(\gamma\right)^n\,\cos(\omega_0 n)\; u[n] = \left(z\right)^n + \left(z^*\right)^n
+\stopformula
+where $z = \frac{\gamma}{2}\, e^{j\theta}$.
+
+The corresponsing Fourier decomposition for a DT signal $x[n]$ is
+
+\placeformula[-]
+\startformula
+X(\omega) = \sum\limits_{-\infty}^{\infty} x[n] e^{j\omega\, n}
+\stopformula
+
+a periodic function in $2\pi$, which may or may not exist for any given signal of interest.
+
+Major classifications of signals are:
+
+\section{Systems}
+
+Systems either
+
+\startitemize[n, packed]
+\item produce signals
+\item measure signals
+\item transform signals (inputs) into other signals (outputs)
+\stopitemize
+
+\startitemize
+\item CT systems transform CT signals to CT signals.
+\item DT systems transform DT signals to DT signals.
+\item Hybrid systems convert between CT and DT signals.
+
+% figures here
+\stopitemize
+
+Major classifications of systems are:
+
+\stopdocument
