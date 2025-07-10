@@ -6,7 +6,7 @@ TARGET=lecture2.html
 # list figure svg files
 DEPS=
 
-OPTIONS= -s -t revealjs -V lang=en  --mathml
+OPTIONS= -s --css=style.css -t revealjs -V lang=en  --mathml
 
 .SECONDARY: # prevent removal of intermediate files
 
@@ -18,7 +18,7 @@ all: $(TARGET)
 %.svg: %.pdf
 	pdf2svg $< $@
 
-%.html: %.tex $(DEPS) 
+%.html: %.tex style.css $(DEPS) 
 	pandoc $(OPTIONS) $< -o $@
 
 view: $(TARGET)
