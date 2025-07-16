@@ -8,6 +8,8 @@ This is a repository of templates/demonstrations of generating accessible docume
 
 * `latex+tikz-to-html`: Basic LaTeX and Tikz figures to standalone (single file) html
 
+* `beamer-to-html`: Basic LaTeX Beamer to html using reveal.js
+
 * `context-to-pdf`: Basic ConTeXt to tagged PDF
 
 
