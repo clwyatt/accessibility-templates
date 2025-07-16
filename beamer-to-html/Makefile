@@ -3,8 +3,8 @@
 # set final output file
 TARGET=lecture2.html
 
-# list figure svg files
-DEPS=
+# list figure files
+DEPS= testimage.png
 
 OPTIONS= -s --css=style.css -t revealjs -V lang=en  --mathml
 

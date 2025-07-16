@@ -11,6 +11,15 @@
     --r-heading4-size: xx-large;
 }
 
+.reveal .slide h3 {
+    text-align: left;
+}
+
+.reveal p {
+  text-align: left;
+  font-size: xx-large;
+}
+
 p.author {
     text-align: center;
     font-size: xx-large;
@@ -21,12 +30,8 @@ p.date {
     font-size: xx-large;
 }
 
-p {
-    text-align: left;
-    font-size: x-large;
-}
 
-code {
-    font-size: x-large;
+.reveal code {
+    font-size: xx-large;
 }
 
