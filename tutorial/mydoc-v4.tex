@@ -1,0 +1,25 @@
+\documentclass{article}
+\usepackage{amsmath,amssymb}
+
+\title{My Title}
+\author{Some One}
+\date{2025-09-01}
+\begin{document}
+\maketitle
+
+\section{Introduction}
+
+A \textbf{famous} \textit{equation} is $V = IR$.
+
+\begin{figure}
+  \centering
+  \includegraphics[alt={As long a description as you like}]{myfig.png}
+  \caption{My Caption Text}
+\end{figure}
+
+\begin{align*}
+  a_k &= \frac{1}{T_0} \int\limits_{T_0} x_p(t) e^{-jk\omega_0 t}\; dt\\
+  &= \frac{1}{T_0} \int\limits_{-\infty}^{\infty} x(t) e^{-jk\omega_0 t}\; dt \mbox{ since } x(t) = 0 \mbox{ outside the interval } (A,B)\\
+\end{align*}
+
+\end{document}
