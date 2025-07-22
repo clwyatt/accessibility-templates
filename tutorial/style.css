@@ -14,8 +14,23 @@
 .reveal .slide h3 {
     text-align: left;
 }
+.reveal .slide h4 {
+    padding-top: 25px;
+    text-align: left;
+}
+.reveal .slide h5 {
+    text-align: left;
+}
+.reveal .slide h6 {
+    text-align: left;
+}
 
 .reveal p {
+  text-align: left;
+  font-size: xx-large;
+}
+
+ul {
   text-align: left;
   font-size: xx-large;
 }

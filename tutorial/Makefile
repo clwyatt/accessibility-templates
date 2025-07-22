@@ -6,7 +6,7 @@ TARGET=clw-tutorial.html
 # list figure files
 DEPS=
 
-OPTIONS= -s --css=style.css -t revealjs -V lang=en --mathml
+OPTIONS= -s --css=style.css -t revealjs -V lang=en -V transition:none --mathml
 
 all: examples $(TARGET)
 
