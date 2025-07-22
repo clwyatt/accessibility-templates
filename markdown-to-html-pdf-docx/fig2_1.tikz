@@ -1,0 +1,51 @@
+\documentclass{standalone}
+
+\usepackage{tikz}
+\usetikzlibrary{calc}
+\usetikzlibrary{positioning}
+\usetikzlibrary{shapes,arrows,decorations.pathreplacing,decorations.markings}
+\tikzstyle{block} = [draw, fill=gray!20, rectangle]
+\tikzstyle{sum} = [draw, fill=gray!20, circle, node distance=1cm]
+\tikzstyle{input} = [coordinate]
+\tikzstyle{output} = [coordinate]
+\tikzstyle{pinstyle} = [pin edge={to-,thin,black}]
+\usepackage{pgfplots}
+ \pgfplotsset{compat=1.13}
+ \usepackage{transparent}
+
+\begin{document}
+
+\begin{tikzpicture}[auto, node distance=1.5cm,>=latex',scale=1, every node/.style={transform shape}]
+  
+  \node[block] at (2,-2) (block1) {$z^{-1}$};
+  \node[block] at (6,-2) (block2) {$z^{-1}$};
+  \node[block] at (6,-4) (block3) {$z^{-1}$};
+  \node[sum] at (4,0) (sum1) {$\Sigma$};
+  \node[sum] at (4,-3) (sum2) {$\Sigma$};
+  \node[sum] at (4,-5) (sum3) {$\Sigma$};
+
+  \node [input, name=input] at (0,0) {};
+  \node [input, name=output] at (8,0) {};
+
+  \draw [->] (input) -- (sum1);
+  \draw [->] (input) -| (block1);
+  \draw [->] (block1) |- (sum2);
+  \draw [->] (sum2) -- node[pos=0.95] {$-$} (sum1);
+  
+  \draw [->] (sum1) -- (output);
+  \draw [->] (sum1) -| (block2);
+  \draw [->] (block2) |- (sum2);
+  \draw [->] (block2) -- (block3);
+  \draw [->] (block3) |- (sum3);
+  \draw [->] (sum3) -- (sum2);
+
+  \node at (-0.5,0) {$x[n]$};
+  \node at (8.5,0) {$y[n]$};
+  \node at (5,-2.7) {$\frac{3}{4}$};
+  \node at (5,-4.7) {$\frac{1}{8}$};
+
+  \node[block] at (8,-3) (block4) {$z^{-1}$};
+  \node [right of=block4] {= delay block};
+\end{tikzpicture}
+
+\end{document}

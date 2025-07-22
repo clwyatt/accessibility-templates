@@ -4,12 +4,10 @@ This is a repository of templates/demonstrations of generating accessible docume
 
 ## Templates
 
-* `latex+png-to-html`: Basic LaTeX and png figures to standalone (single file) html
-
-* `latex+tikz-to-html`: Basic LaTeX and Tikz figures to standalone (single file) html
-
 * `beamer-to-html`: Basic LaTeX Beamer to html using reveal.js
-
-* `context-to-pdf`: Basic ConTeXt to tagged PDF
+* `context-to-pdf`: Basic tagged PDF generation from ConTeXt
+* `latex+png-to-html`: Basic LaTeX and png figures to standalone (single file) html
+* `latex+tikz-to-html`: Basic LaTeX and Tikz figures to standalone (single file) html
+* `markdown-to-html-pdf-docx`: Markdown to three accessible outputs: single-file html, tagged pdf via ConTeXt, and docx.
 
 
