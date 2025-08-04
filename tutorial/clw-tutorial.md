@@ -45,9 +45,9 @@ We can use [pandoc](https://pandoc.org) to convert this to a single accessible h
 > pandoc -s -t html -V lang=en --embed-resources --mathml mydoc.tex -o mydoc.html
 ```
 
-* ``-s`` means create a standalone html file (header etc)
+* ``-s`` create a standalone html file (header etc)
 * ``-t html`` means to produce html
-* ``-V lang=en`` adds the language to the html header and make the Ally tool happy
+* ``-V lang=en`` adds the language to the html header (for screen readers)
 * ``--embed-resources`` embeds any resource files (e.g. images) into the file itself. This makes it easier to distribute and upload to Canvas but increases file size.
 * ``--mathml`` means to use mathml for math. This results in equations a screen reader can automatically navigate.
 
@@ -74,12 +74,14 @@ Suppose we modify ``mydoc.tex``:
 ```{.latex}
 \begin{figure}
   \centering
-  \includegraphics[alt={As long a description as you like}]{myfig.png}
-  \caption{My Caption Text}
+  \includegraphics[alt={illustration of concept X, 
+                        see figure caption for details
+						}]{myfig.png}
+  \caption{My longer caption text with details.}
 \end{figure}
 ```
 
-The [html output](output/mydoc-v3.html) includes the image with accessible alt text with a visible caption.
+The [html output](output/mydoc-v3.html) includes the image with accessible alt text with a visible caption. This is the recommended practice for complex images.
 
 ### Case 1: More complex math
 
@@ -111,7 +113,7 @@ If you use ``tikz`` or ``circuitikz`` for figures, render them to svg and includ
 
 * One of the problems with html is external resource files like images
 * The `--embed-resources` option to pandoc mitigates this, but generates large files in some cases (it has to uuencode binary files).
-* Another option is to use zip files, one per document.
+* Another option is to use zip files, one per document, or a mhtml file.
 * A better option is to use the epub format, which is a zip file of html, images, and metadata. It is considered accessible if you use alt-tags.
 
 ```{.sh}
@@ -140,9 +142,9 @@ If you do not currently use LaTeX, consider Markdown.
 
 * The html+mathml format should be preferred, but sometimes we need to preserve layout and prevent tampering (e.g. for assignments).
 * LaTeX does not currently support tagged PDF (at least that I can get to work)
-* A similar macro system for TeX, called ConTeXt, does support tagging.
+* A very similar macro system for TeX, called ConTeXt, does support tagging.
 * I am using this to generate homework with and without solutions from the same source file.
-* Can be used in conjunction with Markdown if you do not want to learn ConTeXt (the basics are easy). 
+* Can be used in conjunction with Markdown if you do not want to learn ConTeXt (however, the basics are easy). 
 
 It can be tricky to install but if you are interested, let me know.
 
