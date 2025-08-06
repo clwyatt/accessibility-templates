@@ -1,5 +1,5 @@
 $if(tagging)$
-\setupbackend[format=pdf/3]
+\setupbackend[format=PDF/UA-1]
 \enabledirectives[backend.usetags=mkiv]
 \setuptagging[state=start]
 $endif$
