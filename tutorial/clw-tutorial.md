@@ -8,7 +8,7 @@ date: 2025-08-20
 
 The goals for this quick tutorial are to:
 
-* Case 1: show how to leverage existing LaTeX source documents and experience
+* Case 1: show how to leverage existing LaTeX source documents and experience using Pandoc
 * Case 2: introduce Markdown for simple accessible authoring targeting html, docx/pptx, and epub
 * Case 3: introduce ConTeXt for producing accessible PDFs
 * Case 4: introduce Quarto for more complex accessible authoring
@@ -42,27 +42,29 @@ A \textbf{famous} \textit{equation} is $V = IR$.
 We can use [pandoc](https://pandoc.org) to convert this to a single accessible html file.
 
 ```{.sh}
-> pandoc -s -t html -V lang=en --embed-resources --mathml mydoc.tex -o mydoc.html
+> pandoc -s -t html -V lang=en --embed-resources --mathml \
+         mydoc.tex -o mydoc.html
 ```
 
-* ``-s`` create a standalone html file (header etc)
-* ``-t html`` means to produce html
-* ``-V lang=en`` adds the language to the html header (for screen readers)
-* ``--embed-resources`` embeds any resource files (e.g. images) into the file itself. This makes it easier to distribute and upload to Canvas but increases file size.
+* ``-s`` (optional) create a standalone html file (header etc)
+* ``-t html`` produce html
+* ``-V lang=en`` add the language to the html header (for screen readers)
+* ``--embed-resources`` (optional) embeds any resource files (e.g. images) into the file itself. This makes it easier to distribute and upload to Canvas but the increases file size and pasting into the Canvas Rich Content Editor breaks.
 * ``--mathml`` means to use mathml for math. This results in equations a screen reader can automatically navigate.
 
 ### Case 1: Basic LaTeX to Accessible HTML + MathML
 
 The [result](output/mydoc.html) gets 100% in Ally and Firefox Accessibility Issue tool.
 
-![](mydoc.png)
+It does have some minor issues found by the Axe DevTools Chrome Extension that can be solved by modifying the pandoc html template or adding a header and footer.
 
 ### Case 1: Adding Images with Alt Text
 
 Suppose we add to ``mydoc.tex``:
 
 ```{.latex}
-\includegraphics[alt={As long a description as you like}]{myfig.png}
+\includegraphics[alt={As long a description as you like}]
+                {myfig.png}
 ```
 
 The [html output](output/mydoc-v2.html) now includes the image with accessible alt text.
@@ -113,14 +115,14 @@ If you use ``tikz`` or ``circuitikz`` for figures, render them to svg and includ
 
 * One of the problems with html is external resource files like images
 * The `--embed-resources` option to pandoc mitigates this, but generates large files in some cases (it has to uuencode binary files).
-* Another option is to use zip files, one per document, or a mhtml file.
-* A better option is to use the epub format, which is a zip file of html, images, and metadata. It is considered accessible if you use alt-tags.
+* Another option is to use zip files, one per document, or a mhtml/maff/webarchive/warc/... file.
+* A better option is to use the epub3 format, which is a zip file of html, images, and metadata. It is considered accessible if you use alt-tags.
 
 ```{.sh}
 pandoc -s -t epub --mathml input.tex -o output.epub
 ```
 
-There are many readers available including Calibre and Adobe Digital Editions.
+There are many epub3 readers available including Apple Books, Calibre and Adobe Digital Editions.
 
 ### Case 1: LateX Beamer
 
@@ -128,9 +130,9 @@ If you use beamer for your slides. You can convert to one of the html slide fram
 
 See [this example](https://github.com/clwyatt/accessibility-templates/tree/main/beamer-to-html).
 
-### Case 2: Using Markdown
+### Case 2: Using Alternative Markup Languages
 
-If you do not currently use LaTeX, consider Markdown.
+If you do not currently use LaTeX, consider Markdown ( or Asciidoc, or reStructuredText).
 
 * simple markup, but supports sections, math, and figures
 * pandoc can generate accessible html, epub, or docx/pptx (with the proper structure)
@@ -146,7 +148,9 @@ If you do not currently use LaTeX, consider Markdown.
 * I am using this to generate homework with and without solutions from the same source file.
 * Can be used in conjunction with Markdown if you do not want to learn ConTeXt (however, the basics are easy). 
 
-It can be tricky to install but if you are interested, let me know.
+It can be a little [tedious to install](https://wiki.contextgarden.net/Introduction/Installation)
+
+The previous example has an accessible template.
 
 ### Case 4: Using Quarto
 
@@ -165,12 +169,12 @@ I am using this to [convert the ECE 2714 Notes](https://github.com/clwyatt/notes
 * Start small, one document at a time
 * Pandoc is your new best friend
 
-#### Resources
+**Resources:**
 
 * <https://pandoc.org>
 * <https://quarto.org>
 * <https://wiki.contextgarden.net>
-
+* <https://github.com/clwyatt/accessibility-templates>
 
 
 

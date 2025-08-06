@@ -6,9 +6,11 @@ TARGET=clw-tutorial.html
 # list figure files
 DEPS=
 
-OPTIONS= -s --css=style.css -t revealjs -V lang=en -V transition:none --mathml
+#OPTIONS= -s --css=style.css -t revealjs -V lang=en -V transition:none --embed-resources --mathml
+OPTIONS= -s --css=style.css -t revealjs -V lang=en -V transition:none -V controls:false --mathml
 
 all: examples $(TARGET)
+	cp $(TARGET) output
 
 %.html: %.md style.css $(DEPS) 
 	pandoc $(OPTIONS) $< -o $@
