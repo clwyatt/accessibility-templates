@@ -15,7 +15,7 @@ The goals for this quick tutorial are to:
 
 It assumes you are already using a Markup language to author your documents (or want to learn how).
 
-See this [GitHub repository](https://github.com/clwyatt/accessibility-templates) for templates and the source for this presentation.
+See this [GitHub repository](https://github.com/clwyatt/accessibility-templates) for templates, more details, and the source for this presentation.
 
 ### Case 1: Basic LaTeX to Accessible HTML + MathML
 
@@ -145,12 +145,10 @@ If you do not currently use LaTeX, consider Markdown ( or Asciidoc, or reStructu
 * The html+mathml format should be preferred, but sometimes we need to preserve layout and prevent tampering (e.g. for assignments).
 * LaTeX does not currently support tagged PDF (at least that I can get to work)
 * A very similar macro system for TeX, called ConTeXt, does support tagging.
-* I am using this to generate homework with and without solutions from the same source file.
-* Can be used in conjunction with Markdown if you do not want to learn ConTeXt (however, the basics are easy). 
-
-It can be a little [tedious to install](https://wiki.contextgarden.net/Introduction/Installation)
-
-The previous example has an accessible template.
+* Can be used in conjunction with Markdown if you do not want to learn ConTeXt. 
+* You can also use pandoc to convert LaTeX to ConTeXt (about 90% effective)
+* It can be a little [tedious to install](https://wiki.contextgarden.net/Introduction/Installation) but seems robust.
+* The previous example has an accessible template. The mp3 alternative download does a good job reading these files.
 
 ### Case 4: Using Quarto
 
@@ -164,10 +162,10 @@ I am using this to [convert the ECE 2714 Notes](https://github.com/clwyatt/notes
 
 ### Some Takeaways
 
-* Consider moving away from PDF, html+mathml is much more accessible
-* Tag every image
-* Start small, one document at a time
-* Pandoc is your new best friend
+* Consider moving away from PDF, html+mathml is considered more accessible.
+* Tag every image and caption figures.
+* Start small, converting one document at a time, focus on major issues.
+* Pandoc is your new best friend!
 
 **Resources:**
 
