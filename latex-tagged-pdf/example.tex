@@ -1,0 +1,73 @@
+\DocumentMetadata{
+  lang        = en,
+  pdfstandard = ua-2,
+  pdfstandard = a-4f, %or a-4
+  tagging=on,
+  tagging-setup={math/setup=mathml-SE} 
+}
+\title{Lecture N\\ The Title}
+\author{C.L. Wyatt}
+\date{\today}
+\documentclass{article}
+
+\usepackage{graphicx}
+\usepackage{unicode-math}
+
+\begin{document}
+
+\maketitle
+
+In today's lecture we learn some stuff.
+
+\begin{itemize}
+\item thing one
+\item thing two
+\end{itemize}
+
+\section{Introduction Section}
+
+Here is a figure to look at.
+
+\begin{figure}
+  \centering
+  \includegraphics[width=4in, alt={Description Here}]{lecture20_1.png}
+  \caption{The Caption}
+\end{figure}
+
+\section{Tables}
+
+\tagpdfsetup{table/header-rows={1,2}}
+\begin{tabular}{lr}
+\multicolumn{2}{c}{Example}\\
+Name &Value\\
+This & 11 \\
+That & 2
+\end{tabular}
+
+The following is a section with some math.
+
+\section{Convolution Integral}
+
+To derive this we start with the sifting property of the CT impulse function (from chapter 2)
+\[
+\int\limits_{a}^{b} x(t)\delta(t-t_0) \; dt = x(t_0)
+\]
+for any $a < t_0 < b$. A slight change of variables ($t_0 \rightarrow \tau$) and limits ($a \rightarrow -\infty$ and $b \rightarrow \infty$) gives:
+\[
+x(t) = \int\limits_{-\infty}^{\infty} x(\tau)\delta(t-\tau) \; d\tau
+\]
+showing that we can write any CT signal as an infinite sum (integral) of weighted and time-shifted impluse functions.
+
+Let $h(t)$ be the CT {\it impulse response}, the output due to the input $\delta(t)$, i.e. $\delta(t) \mapsto h(t)$. Then if the system is time-invariant: $\delta(t-\tau) \mapsto h(t-\tau)$ and by superposition if the input is writen as
+\[
+x(t) = \int\limits_{-\infty}^{\infty} x(\tau)\delta(t-\tau) \; d\tau
+\]
+then the output is given by
+\[
+  y(t) = \int\limits_{-\infty}^{\infty} x(\tau)h(t-\tau) \; d\tau = x(t) * h(t)
+\]
+This is called the \emph{convolution integral} \index{CT Convolution}.
+
+It is worth pausing here to see the signifigance. For a LTI CT system, if I know its impulse response $h(t)$, I can find the response due to \textbf{any} input using convolution. For this reason the impulse response is another way to represent an LTI system.
+
+\end{document}
