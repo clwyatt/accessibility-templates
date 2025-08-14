@@ -40,6 +40,11 @@ ul {
   font-size: xx-large;
 }
 
+.reveal ol {
+  text-align: left;
+  font-size: xx-large;
+}
+
 p.author {
     text-align: center;
     font-size: xx-large;
