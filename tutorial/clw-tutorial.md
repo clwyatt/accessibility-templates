@@ -167,7 +167,7 @@ If you use ``tikz`` or ``circuitikz`` for figures, render them to svg and includ
 
 If you want to get this content into canvas you can:
 
-1. Create the page in the Canvas Rich Text Editor, and hit th ``</>`` icon to put it into raw html mode.
+1. Create the page in the Canvas Rich Text Editor, and hit the ``</>`` icon to put it into raw html mode.
 2. Remove the standalone and embed switches in pandoc.
 3. Copy/paste the output file into the Canvas editor.
 4. Upload any images and reinsert them with alt-text.

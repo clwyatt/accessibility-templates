@@ -1,0 +1,62 @@
+
+:root {
+    --r-background-color: white;
+    --r-main-font: Arial, Helvetica, sans-serif;
+    --r-main-font-size: large;
+    --r-main-color: black;
+    --r-heading-color: black;
+    --r-heading1-size: xxx-large;
+    --r-heading2-size: xxx-large;
+    --r-heading3-size: xxx-large;
+    --r-heading4-size: xx-large;
+}
+
+.reveal .slide h3 {
+    text-align: left;
+}
+.reveal .slide h4 {
+    padding-top: 25px;
+    text-align: left;
+}
+.reveal .slide h5 {
+    text-align: left;
+}
+.reveal .slide h6 {
+    text-align: left;
+}
+
+.reveal p {
+  text-align: left;
+  font-size: xx-large;
+}
+
+ul {
+  text-align: left;
+  font-size: xx-large;
+}
+
+.reveal ul {
+  text-align: left;
+  font-size: xx-large;
+}
+
+.reveal ol {
+  text-align: left;
+  font-size: xx-large;
+}
+
+p.author {
+    text-align: center;
+    font-size: xx-large;
+}
+
+p.date {
+    text-align: center;
+    font-size: xx-large;
+}
+
+
+.reveal code {
+    font-size: xx-large;
+}
+
