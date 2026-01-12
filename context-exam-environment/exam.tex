@@ -1,0 +1,66 @@
+
+% ========================================
+% SETUP AND CONFIGURATION FOR PROBLEM SETS
+% ========================================
+
+\setupbackend[format=pdf/2a]
+\enabledirectives[backend.usetags=mkiv]
+\setuptagging[state=start]
+\setupinteraction[state=start]
+
+\setuppapersize[letter]
+\setupbodyfont[computer-modern, 10pt]
+
+\setuplayout[
+  top=30pt, 
+  topdistance=10pt,
+  header=12pt,     
+  headerdistance=20pt,
+  bottom=10pt, 
+  bottomdistance=10pt,
+  topspace=\dimexpr(\topheight + \topdistance),
+  height=fit]   
+
+\setuppagenumbering[singlesided, location=footer]
+
+% setup amsmath
+%\usemodule[amsmath]
+
+\usemodule[tikz]
+\usemodule[circuitikz]
+\usemodule[pgfplots]
+\pgfplotsset{compat=1.18}
+
+% Question counter and formatting
+\definecounter[question][way=bytext,prefix=no]
+\def\questionformat#1{{\bf #1.}}
+
+% Parts within questions
+\definecounter[part][way=bytext,prefix=no]
+\def\partformat#1{{\bf \convertnumber{characters}{#1}.}}
+
+% Main question environment
+\define\startquestion{%
+  \blank[medium]
+  \incrementcounter[question]
+  \resetcounter[part]
+  \questionformat{\rawcountervalue[question]}
+}
+\def\stopquestion{%
+\blank[medium]
+}
+
+% Parts within questions
+\define\startpart{%
+  \blank[big]
+  \incrementcounter[part]
+  \startnarrower[left]
+  \partformat{\rawcountervalue[part]}
+}
+\def\stoppart{%
+\stopnarrower
+\blank[small]
+}
+
+% Setup solutions mode, off by default
+\definemode[solutions][no]

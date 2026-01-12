@@ -1,0 +1,697 @@
+\startnotmode[solutions]
+\setupheadertexts[Problem Set \#11]
+\setupheadertexts[ECE 3704 -- Fall 2025][Due: 2025.12.8]
+\stopnotmode
+\startmode[solutions]
+\setupheadertexts[Problem Set \#11 Solutions]
+\setupheadertexts[ECE 3704 -- Fall 2025][] 
+\stopmode
+
+\startdocument
+  [metadata:title={Problem Set 11},
+   metadata:subtitle={ECE 3704},
+   metadata:author={Chris Wyatt},
+   metadata:date={\currentdate}]
+
+\startmode[solutions]
+\subject{Solutions}
+\stopmode
+
+\startnotmode[solutions]
+Name: \hl[25]
+\blank[28pt]
+
+Collaborators: \hl[30]
+\blank[28pt]
+
+Honor Pledge: {\it I have neither given nor received unauthorized assistance on this assignment. I attest that
+these solutions are my own.}
+\blank[28pt]
+
+Signature: \hl[25]
+
+\subject{Instructions}
+
+Your solutions should begin with your name and the name of any collaborators. Each problem solution should include:
+
+\startitemize
+\item the problem restated
+\item the final answer boxed, and
+\item the detailed derivation of your answer (text and equations).
+\stopitemize
+
+Questions requiring computations or plots should generally include the code you wrote as well as the result. Your exercise solutions must be submitted via Canvas by 11:59 pm on the due date as a single .pdf file with all pages oriented in the same direction. You should either typeset your solutions, use a PDF annotating tool, or scan work done with pencil and paper (the free Adobe Scan app works well). You can insert pages if needed but maintain the question ordering. Illegible submissions will not be considered.
+
+\page
+\stopnotmode
+
+%=====================================================================
+\startquestion Given the following circuit,
+\startalignment[center] \dontleavehmode
+\starttikzpicture[american voltages,scale=0.8, every node/.style={transform shape}]
+\draw (-1,0) to[short,o-] (0,0);
+\draw (-1,0) to[open, v=$x(t)$] (-1,-3);
+\draw (0,0) to[R, l=$R_1$] (2,0);
+\draw (2,0) to[C, l=$C_1$] (2,-3);
+\draw (2,0) to[R, l=$R_2$] (6,0);
+\draw (6,-3) to[C, l=$C_2$] (6,0);
+\draw (-1,-3) to[short,o-] (6,-3);
+\stoptikzpicture
+\stopalignment
+derive the state-space description in the form
+\startformula
+\dot{q} = Aq + Bx
+\stopformula
+where $q$ is the state vector.
+
+\blank[big] 
+\framed[width=\textwidth,location=middle, align=flushleft]{
+\startmode[solutions]
+\startformula
+A = 
+    \startmathmatrix[left={\left[}, right={\right]}, align=right]
+        \NC -\left( \frac{1}{R_1 C_1} + \frac{1}{R_2 C_1}\right) \NC \frac{1}{R_2 C_1} \NR
+        \NC \frac{1}{R_2 C_2} \NC -\frac{1}{R_2 C_2} \NR
+    \stopmathmatrix
+    \qquad
+    B =
+        \startmathmatrix[left={\left[}, right={\right]}, align=right]
+        \NC \frac{1}{R_1 C_1} \NR
+        \NC 0 \NR
+    \stopmathmatrix
+\stopformula
+\stopmode
+\startnotmode[solutions]
+\blank[2cm] % adjust to leave enough space
+\stopnotmode
+}
+\blank[big] {\bf Solution:}
+\startmode[solutions]
+Let $q_1$ and $q_2$ be the states corresponding to the capacitor voltages $C_1$ and $C_2$ respectively. Consider the two clockwise loop currents $i_1$ and $i_2$. Then using KVL
+\startplaceformula[eq:1]
+\startformula
+x = R_1 i_1 + q_1
+\stopformula
+\stopplaceformula
+and
+\startplaceformula[eq:2]
+\startformula
+q_1 = R_2 i_2 + q_2
+\stopformula
+\stopplaceformula
+The currents are
+\startplaceformula[eq:3]
+\startformula
+C_1 \dot{q_1} = i_1 - i_2
+\stopformula
+\stopplaceformula
+\startplaceformula[eq:4]
+\startformula
+C_2 \dot{q_2} = i_2
+\stopformula
+\stopplaceformula
+from (\in[eq:1])
+\startplaceformula[eq:5]
+\startformula
+i_1 = -\frac{1}{R_1} q_1 + \frac{1}{R_1} x
+\stopformula
+\stopplaceformula
+from (\in[eq:2])
+\startplaceformula[eq:6]
+\startformula
+i_2 = \frac{1}{R_2} q_1 - \frac{1}{R_2} q_1
+\stopformula
+\stopplaceformula
+Substitution of (\in[eq:5]) and (\in[eq:6]) into (\in[eq:3]) and (\in[eq:4]) gives
+\startformula
+\startmathalignment
+\NC \dot{q_1} \NC = -\left( \frac{1}{R_1 C_2} + \frac{1}{R_2 C_2}\right) q_1 + \frac{1}{R_2 C_1} q_2 + \frac{1}{R_1 C_1} x\NR
+\NC \dot{q_2} \NC = \frac{1}{R_2 C_2} q_1 - \frac{1}{R_2 C_2} q_2
+\stopmathalignment
+\stopformula
+Thus
+\startformula
+A = 
+    \startmathmatrix[left={\left[}, right={\right]}, align=right]
+        \NC -\left( \frac{1}{R_1 C_2} + \frac{1}{R_2 C_2}\right) \NC \frac{1}{R_2 C_1} \NR
+        \NC \frac{1}{R_2 C_2} \NC -\frac{1}{R_2 C_2} \NR
+    \stopmathmatrix
+\stopformula
+and
+\startformula
+    B =
+        \startmathmatrix[left={\left[}, right={\right]}, align=right]
+        \NC \frac{1}{R_1 C_1} \NR
+        \NC 0 \NR
+    \stopmathmatrix
+\stopformula
+\stopmode
+\startnotmode[solutions]
+\blank[10cm] % adjust to leave enough space
+\stopnotmode
+
+\stopquestion
+%=====================================================================
+
+\page
+
+%=====================================================================
+\startquestion Given the transfer function
+  \startformula
+  H(s) = \frac{100}{(s+5)(s^2 + 2s + 7)}\; ,
+  \stopformula
+  derive the state-space description in the form
+  \startformula
+  \dot{q} = Aq + Bx
+  \stopformula
+  \startformula
+  y = Cq + Dx
+  \stopformula
+  where $q$ is the state vector, $x$ is the input, and $y$ the output.
+  \blank[big] 
+  \framed[width=\textwidth,location=middle, align=flushleft]{
+  \startmode[solutions]
+  \startformula
+  A = 
+    \startmathmatrix[left={\left[}, right={\right]}, align=right]
+        \NC 0 \NC 1 \NC 0 \NR
+        \NC 0 \NC 0 \NC 1 \NR
+        \NC -35 \NC -17 \NC -7 \NR
+    \stopmathmatrix
+    \quad
+    B =
+        \startmathmatrix[left={\left[}, right={\right]}, align=right]
+        \NC 0 \NR
+        \NC 0 \NR
+        \NC 100 \NR
+\stopmathmatrix
+    \quad
+    C = [1 \; 0 \; 0]
+    \quad   
+    D = [0]
+  \stopformula
+  \stopmode
+  \startnotmode[solutions]
+  \blank[2cm] % adjust to leave enough space
+  \stopnotmode
+  }
+  \blank[big] {\bf Solution:}
+  \startmode[solutions]
+ \startformula
+ H(s) = \frac{Y(s)}{X(s)} = \frac{100}{(s+5)(s^2 + 2s + 7)}
+ \stopformula
+ or
+ \startformula
+ s^3 Y(s) + 7s^2 Y(s) + 17 s Y(s) + 35 Y(s) = 100 X(s)
+ \stopformula
+ This is equivalent to the ODE
+ \startformula
+  D^3 y(t) + 7D^2 y(t) + 17 D y(t) + 35 y(t) = 100 x(t)
+ \stopformula
+ Let $q_1 = y$, $q_2 = Dy$, and $q_3 = D^2 y$, then
+ \startformula
+ D^3 y = \dot{q_3} = -7 q_3 - 17 q_2 -35 q_1 + 100 x
+ \stopformula
+ \startformula
+ \dot{q_2} = q_3
+ \stopformula
+  \startformula
+ \dot{q_1} = q_2
+ \stopformula
+ Thus
+  \startformula
+  A = 
+    \startmathmatrix[left={\left[}, right={\right]}, align=right]
+        \NC 0 \NC 1 \NC 0 \NR
+        \NC 0 \NC 0 \NC 1 \NR
+        \NC -35 \NC -17 \NC -7 \NR
+    \stopmathmatrix
+    \quad
+    B =
+        \startmathmatrix[left={\left[}, right={\right]}, align=right]
+        \NC 0 \NR
+        \NC 0 \NR
+        \NC 100 \NR
+\stopmathmatrix
+    \quad
+    C = [1 \; 0 \; 0]
+    \quad   
+    D = [0]
+  \stopformula
+  \stopmode
+  \startnotmode[solutions]
+  \blank[10cm] % adjust to leave enough space
+  \stopnotmode
+  
+\stopquestion
+%=====================================================================
+
+\page
+
+
+%=====================================================================
+\startquestion Consider the circuit from Lab 1
+\startalignment[center] \dontleavehmode
+\starttikzpicture[american voltages,scale=0.8, every node/.style={transform shape}]
+\draw
+(4,-0.5) node[op amp] (opamp1) {}
+(10,-1) node[op amp] (opamp2) {}
+(8,4) node[op amp, xscale=-1] (opamp3) {}
+(-1,0) to[R,l=$R_G$,o-] (2,0)
+(2,0) to[short] (opamp1.-)
+(2,2) to[R,l=$R_1$] (5,2)
+(2,4) to[R,l=$R_2$] (5,4)
+(2,-3) to[R,l=$R_Q$] (2,-5)
+(2,-5) node[ground] (GND1) {}
+(opamp1.out) to[R,l=$R_F$] (opamp2.-)
+(opamp2.+) node[ground] (GND2) {}
+(2,-3) to[R,l=$R_2$] (8,-3)
+(opamp3.+) node[ground] (GND3) {};
+\draw (7,6) to[C,l=$C_1$] (9,6);
+\draw (9,1) to[C,l=$C_2$] (11,1);
+\draw (5,2)-|(opamp1.out);
+\draw (2,4)--(2,2) -- (2,0);
+\draw (opamp3.-) |- (9,6);
+\draw (7,6) -| (opamp3.out) -- (5,4);
+\draw (opamp3.-) to[R,l=$R_F$] (11,4.5);
+\draw (opamp1.+) -| (2,-3);
+\draw (opamp2.out) |- (8,-3);
+\draw (opamp2.out) |- (11,1);
+\draw (opamp2.out) |- (11,4.5);
+\draw (9,1) -| (opamp2.-);
+\node at (-1.5,0) {$x(t)$};
+\draw (opamp2.out) to[short, -o] ++(1,0);
+\node at (13,-1) {$y(t)$};
+
+\filldraw[fill=black, radius=2pt] (2,0) circle;
+\filldraw[fill=black, radius=2pt] (2,2) circle;
+\filldraw[fill=black, radius=2pt] (2,-3) circle;
+\filldraw[fill=black, radius=2pt] (opamp1.out) circle;
+\filldraw[fill=black, radius=2pt] (opamp2.out) circle;
+\filldraw[fill=black, radius=2pt] (opamp3.out) circle;
+\filldraw[fill=black, radius=2pt] (opamp2.-) circle;
+\filldraw[fill=black, radius=2pt] (opamp3.-) circle;
+\filldraw[fill=black, radius=2pt] (11.2,1) circle;
+\stoptikzpicture
+\stopalignment
+Derive the state-space description in the form
+  \startformula
+  \dot{q} = Aq + Bx
+  \stopformula
+  \startformula
+  y = Cq + Dx
+  \stopformula
+  where $q$ is the state vector, $x$ is the input, and $y$ the output. Then convert that description to the transfer function $H(s)$.
+  \blank[big] 
+  \framed[width=\textwidth,location=middle, align=flushleft]{
+  \startmode[solutions]
+  \startformula
+  A = \startmathmatrix[left={\left[}, right={\right]}, align=right]
+        \NC 0 \NC -\frac{1}{R_F C_1} \NR
+        \NC \frac{R_1}{R_2 C_2 R_F} \NC - \frac{R_1 R_2 + R_2 R_G + R_1 R_G}{R_2 R_G}\frac{R_Q}{(R_2+R_Q)C_2 R_F} \NR
+    \stopmathmatrix
+    \quad
+    B = \startmathmatrix[left={\left[}, right={\right]}, align=right]
+        \NC 0 \NR
+        \NC \frac{R_1}{C_2 R_G R_F} \NR
+\stopmathmatrix
+  \stopformula
+\startformula
+C = [0 \quad 1] \qquad D = [0 \quad 0]
+\stopformula
+\startformula
+H(s) = \frac{\frac{R_1}{C_2 R_F R_G} s}{s^2 + \frac{R_1 R_2 + R_2 R_G + R_1 R_G}{R_2 R_G}\frac{R_Q}{(R_2+R_Q)C_2 R_F}\, s + \frac{R_1}{R_2C_1C_2R_F^2}}
+\stopformula
+  \stopmode
+  \startnotmode[solutions]
+  \blank[2cm] % adjust to leave enough space
+  \stopnotmode
+  }
+  \blank[big] {\bf Solution:}
+  \startmode[solutions]
+  First we choose the state variables as the capacitor voltages with the orientation indicated below.
+  \startalignment[center] \dontleavehmode
+\starttikzpicture[american voltages,scale=0.8, every node/.style={transform shape}]
+\draw
+(4,-0.5) node[op amp, label=$O_1$] (opamp1) {}
+(10,-1) node[op amp, label=$O_2$] (opamp2) {}
+(8,4) node[op amp, xscale=-1, label=$O_3$] (opamp3) {}
+(-1,0) to[R,l=$R_G$,o-] (2,0)
+(2,0) to[short] (opamp1.-)
+(2,2) to[R,l=$R_1$] (5,2)
+(2,4) to[R,l=$R_2$] (5,4)
+(2,-3) to[R,l=$R_Q$] (2,-5)
+(2,-5) node[ground] (GND1) {}
+(opamp1.out) to[R,l=$R_F$] (opamp2.-)
+(opamp2.+) node[ground] (GND2) {}
+(2,-3) to[R,l=$R_2$] (8,-3)
+(opamp3.+) node[ground] (GND3) {};
+\draw (7,6) to[C,l=$C_1$, v=$q_1(t)$] (9,6);
+\draw (11,1) to[C,l=$C_2$, v=$q_2(t)$] (9,1);
+\draw (5,2)-|(opamp1.out);
+\draw (2,4)--(2,2) -- (2,0);
+\draw (opamp3.-) |- (9,6);
+\draw (7,6) -| (opamp3.out) -- (5,4);
+\draw (opamp3.-) to[R,l=$R_F$] (11,4.5);
+\draw (opamp1.+) -| (2,-3);
+\draw (opamp2.out) |- (8,-3);
+\draw (opamp2.out) |- (11,1);
+\draw (opamp2.out) |- (11,4.5);
+\draw (9,1) -| (opamp2.-);
+\node at (-1.5,0) {$x(t)$};
+\draw (opamp2.out) to[short, -o] ++(1,0);
+\node at (13,-1) {$y(t)$};
+
+\node at (2,-0.5) {$v_1(t)$};
+\node at (5,-1) {$v_2(t)$};
+
+\filldraw[fill=black, radius=2pt] (2,0) circle;
+\filldraw[fill=black, radius=2pt] (2,2) circle;
+\filldraw[fill=black, radius=2pt] (2,-3) circle;
+\filldraw[fill=black, radius=2pt] (opamp1.out) circle;
+\filldraw[fill=black, radius=2pt] (opamp2.out) circle;
+\filldraw[fill=black, radius=2pt] (opamp3.out) circle;
+\filldraw[fill=black, radius=2pt] (opamp2.-) circle;
+\filldraw[fill=black, radius=2pt] (opamp3.-) circle;
+\filldraw[fill=black, radius=2pt] (11.2,1) circle;
+\stoptikzpicture
+\stopalignment
+Next we write down the circuit equations. Consider the voltages at the nodes indicated above. Doing a KCL at node $v_1$
+\startplaceformula[eq:7]\startformula
+\frac{x - v_1}{R_G} + \frac{v_2 - v_1}{R_1} + \frac{q_1 - v_1}{R_2} = 0 
+\stopformula\stopplaceformula
+A KCL at the inverting input to $O_2$ which by the virtual ground is at a potential of zero:
+\startplaceformula[eq:8]\startformula
+\frac{v_2}{R_F} + C_2 \dot{q_2} = 0 
+\stopformula\stopplaceformula
+Similartly, a KCL at the inverting input to $O_3$ which by the virtual ground is at a potential of zero:
+\startplaceformula[eq:9]\startformula
+C_1 \dot{q_1} + \frac{q_2}{R_F} = 0 
+\stopformula\stopplaceformula
+The voltage divider at the bottom gives:
+\startplaceformula[eq:10]\startformula
+\frac{q_2 - v_1}{R_2} = \frac{v_1}{R_Q} 
+\stopformula\stopplaceformula
+We then eliminate all the variables other than the state variables and the input (i.e. $v_1$, $v_2$, and $v_3$). For example, from  (\in[eq:9]) we get the first state equation
+\startformula
+\dot{q_1} = -\frac{1}{R_F C_1} q_2
+\stopformula
+
+From (\in[eq:8]) we get
+\startplaceformula[eq:11]\startformula
+\dot{q_2} = -\frac{1}{R_F C_2} v_2
+\stopformula\stopplaceformula
+
+From (\in[eq:10]) we get
+\startplaceformula[eq:12]\startformula
+v_1 = \frac{R_Q}{R_2 + R_Q} q_2
+\stopformula\stopplaceformula
+
+Then substitute (\in[eq:12]) into (\in[eq:7]) and solve for $v_2$
+\startplaceformula[eq:13]\startformula
+v_2 = -\frac{R_1}{R_2} q_1 + \frac{R_1 R_2 + R_2 R_G + R_1 R_G}{R_2 R_G}\frac{R_Q}{R_2+R_Q} q_2 - R_1 x
+\stopformula\stopplaceformula
+
+Then substitute (\in[eq:13]) into (\in[eq:11]) to get the second state equation
+\startformula
+\dot{q_2} = \frac{R_1}{R_2 C_2 R_F} q_1 - \frac{R_1 R_2 + R_2 R_G + R_1 R_G}{R_2 R_G}\frac{R_Q}{(R_2+R_Q)C_2 R_F} q_2 + \frac{R_1}{C_2 R_G R_F} x
+\stopformula
+
+Thus the final form of the state equations is
+  \startformula
+  \dot{q} = Aq + Bx
+  \stopformula
+
+where 
+ \startformula
+  A = 
+    \startmathmatrix[left={\left[}, right={\right]}, align=right]
+        \NC 0 \NC a \NR
+        \NC b \NC c \NR
+    \stopmathmatrix
+    =
+        \startmathmatrix[left={\left[}, right={\right]}, align=right]
+        \NC 0 \NC -\frac{1}{R_F C_1} \NR
+        \NC \frac{R_1}{R_2 C_2 R_F} \NC - \frac{R_1 R_2 + R_2 R_G + R_1 R_G}{R_2 R_G}\frac{R_Q}{(R_2+R_Q)C_2 R_F} \NR
+    \stopmathmatrix
+    \quad
+    B =
+        \startmathmatrix[left={\left[}, right={\right]}, align=right]
+        \NC 0 \NR
+        \NC d \NR
+\stopmathmatrix
+=       \startmathmatrix[left={\left[}, right={\right]}, align=right]
+        \NC 0 \NR
+        \NC \frac{R_1}{C_2 R_G R_F} \NR
+\stopmathmatrix
+\stopformula
+
+To find the transfer function we note that $y(t) = q_2(t)$. Thus the observation equation is simply
+\startformula
+y = Cq +Dx = [0 \quad 1] q + [0 \quad 0] x
+\stopformula
+
+To find the transfer function we note
+\startformula
+H(s) = \frac{Y(s)}{X(s)} = \frac{Q_2(S)}{X(s)} 
+\stopformula
+
+Taking the Laplace transform of the state equations and solving for $Q$ gives
+\startformula
+Q(s) = \left(sI - A \right)^{-1}\, B\, x
+\stopformula
+
+where
+\startformula
+\left(sI - A \right)^{-1} = \frac{1}{s^2 -cs -a\, b} \startmathmatrix[left={\left[}, right={\right]}, align=right]
+\NC s-c \NC -a\NR
+\NC -b \NC s \NR
+\stopmathmatrix
+\stopformula
+Thus
+\startformula
+H(s) = \frac{ds}{s^2 -c\, s - a\, b}
+\stopformula
+Substituting for the constants
+
+\startformula
+H(s) = \frac{\frac{R_1}{C_2 R_G R_F} s}{s^2 + \frac{R_1 R_2 + R_2 R_G + R_1 R_G}{R_2 R_G}\frac{R_Q}{(R_2+R_Q)C_2 R_F}\, s + \frac{R_1}{R_2C_1C_2R_F^2}}
+\stopformula
+
+  \stopmode
+  \startnotmode[solutions]
+  \page
+  {\bf 3.} (cont)
+  \stopnotmode
+  
+\stopquestion
+%=====================================================================
+
+
+\page
+
+%=====================================================================
+\startquestion Given the following block diagram of a DT system
+\startalignment[center] \dontleavehmode
+\tikzstyle{block} = [draw, fill=gray!20, rectangle, 
+      minimum height=2em, minimum width=2em]
+\tikzstyle{sum} = [draw, fill=gray!20, circle, node distance=1cm]
+\starttikzpicture
+    \node [shape=coordinate, name=input] at (-2,0) {};
+    \node [left of=input] {$x[n]$};
+    \node [sum] at (2,0) (sum1) {$\Sigma$};
+    \node [block] at (4,-1) (block1) {$z^{-1}$};
+    \node [block] at (4,-3) (block2) {$z^{-1}$};
+    \node [block] at (0,-1) (block3) {$z^{-1}$};
+    \node [block] at (0,-3) (block4) {$z^{-1}$};
+    \node [shape=coordinate, name=conn1] at (4,-2) {};
+    \node [shape=coordinate, name=conn2] at (4,-4) {};
+    \node [shape=coordinate, name=conn3] at (0, 0) {};
+    \node [shape=coordinate, name=conn4] at (0,-2) {};
+    \node [shape=coordinate, name=conn5] at (0,-4) {};
+    \node [sum] at (2,-2) (sum2) {$\Sigma$};
+    \node [sum] at (2,-4) (sum3) {$\Sigma$};
+    \node [shape=coordinate, name=conn] at (4,0) {};
+    \node [shape=coordinate] at (5,0) (output) {};
+    \node [right of=output] {$y[n]$};
+    
+    \draw [->] (input) -- (sum1);
+    \draw [->] (conn3) -- (block3);
+    \draw [->] (block3) -- (block4);
+    \draw (block4) -- (conn5);
+    \draw [->] (conn4) -- node[yshift=0.3cm] {$a$} (sum2);
+    \draw [->] (conn5) -- node[yshift=0.3cm] {$b$} (sum3);
+    \draw (sum1) -- (conn);
+    \draw [->] (conn) -- (output);
+    \draw [->] (conn) -- (block1);
+    \draw (block1) -- (conn1);
+    \draw [->] (conn1) -- node[yshift=0.3cm] {$c$} (sum2);
+    \draw [->] (conn1) -- (block2);
+    \draw (block2) -- (conn2);
+    \draw [->] (conn2) -- node[yshift=0.3cm] {$d$} (sum3);
+    \draw [->] (sum3) -- (sum2);
+    \draw [->] (sum2) -- (sum1);
+\stoptikzpicture
+\stopalignment
+  derive the state space description in the form
+  \startformula
+  q[n+1] = Aq[n] + Bx[n]
+  \stopformula
+  \startformula
+  y[n] = Cq[n] + Dx[n]
+  \stopformula
+
+  \blank[big] 
+  \framed[width=\textwidth,location=middle, align=flushleft]{
+  \startmode[solutions]
+    \startformula
+  A = 
+    \startmathmatrix[left={\left[}, right={\right]}, align=right]
+        \NC 0 \NC 1 \NR
+        \NC d \NC c \NR
+    \stopmathmatrix
+    \quad
+    B =
+        \startmathmatrix[left={\left[}, right={\right]}, align=right]
+        \NC 0 \NR
+        \NC 1 \NR
+\stopmathmatrix
+    \quad
+    C = [(b+d) \; (a+c)]
+    \quad   
+    D = [1]
+  \stopformula
+  \stopmode
+  \startnotmode[solutions]
+  \blank[2cm] % adjust to leave enough space
+  \stopnotmode
+  }
+  \blank[big] {\bf Solution:}
+  \startmode[solutions]
+  The given block diagram is in DFI. Reversing the order of the series combination gives the direct form II.
+\startalignment[center] \dontleavehmode
+\tikzstyle{block} = [draw, fill=gray!20, rectangle, 
+      minimum height=2em, minimum width=2em]
+\tikzstyle{sum} = [draw, fill=gray!20, circle, node distance=1cm]
+\starttikzpicture
+    \node [shape=coordinate, name=input] at (-1,0) {};
+    \node [left of=input] {$x[n]$};
+    \node [sum] at (1,0) (sum1) {$\Sigma$};
+    \node [block] at (3,-1) (block1) {$z^{-1}$};
+    \node [block] at (3,-3) (block2) {$z^{-1}$};
+    \node [sum] at (1,-2) (sum2) {$\Sigma$};
+    \node [sum] at (1,-4) (sum3) {$\Sigma$};
+    \node [sum] at (5, 0) (sum4) {$\Sigma$};
+    \node [sum] at (5,-2) (sum5) {$\Sigma$};
+    \node [sum] at (5,-4) (sum6) {$\Sigma$};
+    \node [shape=coordinate, name=conn1] at (3,0) {};
+    \node [shape=coordinate, name=conn2] at (3,-2) {};
+    \node [shape=coordinate, name=conn3] at (3,-4) {};
+    \node [shape=coordinate] at (6,0) (output) {};
+    \node [right of=output] {$y[n]$};
+    \draw [->] (input) -- (sum1);
+    \draw [->] (sum1) -- (sum4);
+    \draw [->] (conn1) -- (block1);
+    \draw (block1) -- (conn2);
+    \draw [->] (conn2) -- (block2);
+    \draw (block2) -- (conn3);
+    \draw [->] (conn2) -- node[yshift=0.3cm] {$c$} (sum2);
+    \draw [->] (conn2) -- node[yshift=0.3cm] {$a$} (sum5);
+    \draw [->] (conn3) -- node[yshift=0.3cm] {$d$}(sum3);
+    \draw [->] (conn3) -- node[yshift=0.3cm] {$b$}(sum6);
+    \draw [->] (sum3) -- (sum2);
+    \draw [->] (sum2) -- (sum1);
+    \draw [->] (sum6) -- (sum5);
+    \draw [->] (sum5) -- (sum4);
+    \draw [->] (sum4) -- (output);
+    \stoptikzpicture
+\stopalignment
+Let $q_2 = $ output of second delay and $q_1 = $ output of first delay. Then
+\startformula
+\startmathalignment
+\NC q_2[n+1] \NC = c q_2[n] + d q_1[n] + x \NR
+\NC q_1[n+1] \NC = q_2 \NR
+\stopmathalignment
+\stopformula
+  and
+    \startformula
+\startmathalignment
+\NC y \NC = q_2[n+1] + a q_2[n] + b q_1[n] \NR
+\NC  \NC = (a+c) q_2 + (b+d) q_1 + x \NR
+\stopmathalignment
+\stopformula
+Thus
+    \startformula
+  A = 
+    \startmathmatrix[left={\left[}, right={\right]}, align=right]
+        \NC 0 \NC 1 \NR
+        \NC d \NC c \NR
+    \stopmathmatrix
+    \quad
+    B =
+        \startmathmatrix[left={\left[}, right={\right]}, align=right]
+        \NC 0 \NR
+        \NC 1 \NR
+\stopmathmatrix
+    \quad
+    C = [ (b+d) \; (a+c)]
+    \quad   
+    D = [1]
+  \stopformula
+  \stopmode
+  \startnotmode[solutions]
+  \blank[10cm] % adjust to leave enough space
+  \stopnotmode
+  
+\stopquestion
+%=====================================================================
+
+\page
+
+
+%=====================================================================
+\startquestion  For the circuit in problem 1 where $R_1 = 100\,\text{k}\Omega$, $R_2 =50\,\text{k}\Omega$, and $C_1 = C_2 = 1\,\mu$F, use the derived state-space desciption to simulate the system when the input is the expression
+  \startformula
+  x(t) = \frac{t e^{-t}}{2+\cos(10 t)}u(t)
+  \stopformula
+  using the Runge-Kutta integrator (in C/C++ as demonstrated in class, or using the ode45 command in Matlab) for 8 seconds, starting at $t = 0$. Plot the input and all state trajectories, overlayed on the same plot, or as separate subplots. Submit your code as a zip file.
+
+\blank[big] {\bf Solution:}
+  \startmode[solutions]
+  Substituting the values we get
+  \startformula
+  \startmathalignment
+ \NC \dot{q} \NC = \startmathmatrix[left={\left[}, right={\right]}, align=right]
+        \NC -30 \NC 20 \NR
+        \NC 20 \NC -20 \NR
+\stopmathmatrix
+q + \startmathmatrix[left={\left[}, right={\right]}, align=right]
+        \NC 10 \NR
+        \NC 0 \NR
+\stopmathmatrix
+x \NR
+\NC \NC= f(t,q) \NR
+  \stopmathalignment
+  \stopformula
+  where
+  \startformula
+  f(t,q) = \startmathmatrix[left={\left[}, right={\right]}, align=right]
+        \NC -30 q_1 + 20 q_2 + \frac{10 t e^{-t}}{2+\cos(10 t)} \NR
+        \NC 20 q_1 -20 q_2 \NR
+\stopmathmatrix
+  \stopformula
+  When simulated the resulting state space trajectories are
+  \startalignment[center]
+\dontleavehmode
+{\externalfigure[graphics/ps11p5.pdf]}
+\stopalignment
+  \stopmode
+  \startnotmode[solutions]
+  \blank[10cm] % adjust to leave enough space
+  \stopnotmode
+  
+\stopquestion
+%=====================================================================
+
+
+\stopdocument

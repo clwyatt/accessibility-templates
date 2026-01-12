@@ -11,7 +11,7 @@ This is a repository of templates/demonstrations of generating accessible docume
 * `latex+png-to-html`: Basic LaTeX and png figures to standalone (single file) html
 * `latex+tikz-to-html`: Basic LaTeX and Tikz figures to standalone (single file) html
 * `markdown-to-html-pdf-docx`: Markdown to three accessible outputs: single-file html, tagged pdf via ConTeXt, and docx.
-
+* `context-exam-environment`: a ConTeXt environment similar to the LaTeX exam class. See the readme in that directory for more information.
 ## Documentation
 
 * Each template contains a Makefile that documents the tools used and their invocations. 
